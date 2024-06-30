@@ -34,19 +34,24 @@ static const char *const autostart[] = {
   "xset", "s", "off", NULL,
   "xset", "s", "noblank", NULL,
   "xset", "-dpms", NULL,
+  "nm-applet", NULL,
+  "pnmixer", NULL,
   "dbus-update-activation-environment", "--systemd", "--all", NULL,
-  "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
+//   "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1", NULL,
+  "/usr/libexec/polkit-mate-authentication-agent-1", NULL,
   "flameshot", NULL,
+  "qbittorrent", NULL,  // Add qBittorrent to startup
   "dunst", NULL,
   "picom", "--animations", "-b", NULL,
-  "sh", "-c", "feh --randomize --bg-fill /home/titus/Pictures/backgrounds/*", NULL,
-  "synergy", NULL,
+//   "sh", "-c", "feh --randomize --bg-fill /home/titus/Pictures/backgrounds/*", NULL,
+  "sh", "-c", "feh --bg-fill /usr/share/backgrounds/wallpapers/*", NULL,
+//   "synergy", NULL,
   "slstatus", NULL,
   NULL /* terminate */
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "" };
+static const char *tags[] = { "󱂵", "", "", "", "", "", "󰍹" };
 
 static const char ptagf[] = "[%s %s]";  /* format of a tag label */
 static const char etagf[] = "[%s]";     /* format of an empty tag */
@@ -61,6 +66,7 @@ static const Rule rules[] = {
 	{ "St",      NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ "qBittorrent", NULL,    NULL,           1 << 4,    0,          0,           0,        -1 }, /* Assign qBittorrent to workspace 5 */
 };
 
 /* layout(s) */
@@ -101,7 +107,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,          spawn,                  SHCMD ("flameshot gui -p /media/drive/Screenshots/")},
 	{ MODKEY|ControlMask,           XK_p,          spawn,                  SHCMD ("flameshot gui --clipboard")},
 	{ MODKEY,                       XK_e,          spawn,                  SHCMD ("thunar")},
-	{ MODKEY,                       XK_w,          spawn,                  SHCMD ("looking-glass-client -F")},
+	// { MODKEY,                       XK_w,          spawn,                  SHCMD ("looking-glass-client -F")},
 	{ 0,                            0x1008ff02,    spawn,                  SHCMD ("xbacklight -inc 10")},
 	{ 0,                            0x1008ff03,    spawn,                  SHCMD ("xbacklight -dec 10")},
 	{ 0,                            0x1008ff1b,    spawn,                  SHCMD ("xbacklight -inc 10")},
@@ -141,6 +147,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                                  2)
 	TAGKEYS(                        XK_4,                                  3)
 	TAGKEYS(                        XK_5,                                  4)
+	TAGKEYS(                        XK_6,                                  5)
+    TAGKEYS(                        XK_7,                                  6)
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_r,          spawn,                  SHCMD("systemctl reboot")},
 	{ MODKEY|ControlMask|ShiftMask, XK_s,          spawn,                  SHCMD("systemctl suspend")},
